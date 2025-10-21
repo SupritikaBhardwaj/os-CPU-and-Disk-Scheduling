@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CPU Scheduling Simulator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        h2 {
+            margin-top: 40px;
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            width: 70%;
+            margin: 30px auto;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            width: 60%;
+            max-width: 300px;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        #quantum_div {
+            display: none;
+        }
+
+        button, input[type="submit"] {
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #f57c00;
+        }
+
+        #process_fields input {
+            width: 100px;
+            margin: 5px;
+        }
+
+        #process_fields {
+            margin-top: 20px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>⚙️ CPU Scheduling Simulator</h2>
+
+    <form action="/simulate" method="POST">
+        <label>Number of Processes:</label>
+        <input type="number" name="num_processes" required><br>
+
+        <label>Algorithm:</label>
+        <select name="algorithm" required onchange="toggleQuantum(this.value)">
+            <option>FCFS</option>
+            <option>SJF (Non-Preemptive)</option>
+            <option>SJF (Preemptive)</option>
+            <option>Round Robin</option>
+        </select>
+
+        <div id="quantum_div">
+            <label>Time Quantum:</label>
+            <input type="number" name="quantum" min="1"><br>
+        </div>
+
+        <script>
+            function toggleQuantum(value) {
+                document.getElementById("quantum_div").style.display =
+                    (value === "Round Robin") ? "block" : "none";
+            }
+
+            function generateFields() {
+                const num = document.querySelector('[name="num_processes"]').value;
+                let html = "";
+                for (let i = 1; i <= num; i++) {
+                    html += `<div>
+                                <strong>P${i}</strong> 
+                                Arrival: <input type="number" name="arrival_${i}" required>
+                                Burst: <input type="number" name="burst_${i}" required>
+                             </div>`;
+                }
+                document.getElementById("process_fields").innerHTML = html;
+            }
+        </script>
+
+        <button type="button" onclick="generateFields()">➕ Generate Fields</button>
+
+        <div id="process_fields"></div>
+
+        <br><input type="submit" value="🚀 Run Simulation">
+    </form>
+
+    <div class="footer">
+        Developed by <b>Somya Juyal</b> 💻 | CPU Scheduling Project
+    </div>
+</body>
+</html>

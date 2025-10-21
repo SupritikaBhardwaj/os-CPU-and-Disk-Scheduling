@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ algo }} Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #232526, #414345);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 2rem;
+        }
+
+        .result-box {
+            background: rgba(255, 255, 255, 0.1);
+            width: 70%;
+            margin: 40px auto;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        h3 {
+            margin: 10px 0;
+        }
+
+        img {
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        a {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>{{ algo }} Results</h2>
+
+    <div class="result-box">
+        <h3>📊 Average Waiting Time: {{ avg_wait }}</h3>
+        <h3>⏱️ Average Turnaround Time: {{ avg_turn }}</h3>
+
+        <h3>🧩 Gantt Chart:</h3>
+        <img src="{{ url_for('static', filename='gantt.png') }}" alt="Gantt Chart">
+
+        <br><br>
+        <a href="/">🔙 Run Another Simulation</a>
+    </div>
+
+    <div class="footer">
+        Made with ❤️ by <b>Somya Juyal</b> | Flask + Python
+    </div>
+</body>
+</html>
